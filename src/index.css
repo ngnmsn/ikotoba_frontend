@@ -369,6 +369,9 @@ video {
 [hidden] {
   display: none;
 }
+  html {
+    font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+  }
 
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
@@ -463,29 +466,71 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.mx-7 {
+  margin-left: 1.75rem;
+  margin-right: 1.75rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.mt-32 {
+  margin-top: 8rem;
+}
+.mt-28 {
+  margin-top: 7rem;
+}
+.mt-24 {
+  margin-top: 6rem;
+}
+.h-\[2\.44\] {
+  height: 2.44;
+}
+.h-\[2\.44rem\] {
+  height: 2.44rem;
+}
+.h-\[2rem\] {
+  height: 2rem;
+}
+.w-full {
+  width: 100%;
+}
+.w-\[5\.25rem\] {
+  width: 5.25rem;
+}
+.w-\[5rem\] {
+  width: 5rem;
+}
 .rounded-lg {
   border-radius: 0.5rem;
 }
-.bg-sky-500 {
+.bg-blue-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(14 165 233 / var(--tw-bg-opacity));
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
-.bg-yellow-500 {
+.bg-green-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.pt-14 {
+  padding-top: 3.5rem;
 }
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+.pt-12 {
+  padding-top: 3rem;
 }
-.font-bold {
-  font-weight: 700;
+.pt-10 {
+  padding-top: 2.5rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
