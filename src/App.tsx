@@ -18,6 +18,9 @@ function App() {
         >
           Learn React
         </a>
+        <div className="bg-yellow-500 rounded-lg text-white font-bold py-2 px-4">
+          Hello Tailwind
+        </div>
       </header>
     </div>
   );
