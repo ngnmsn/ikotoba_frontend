@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Group from './pages/Group';
+import TalkSession from './pages/TalkSession';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/home' element={<Home />}></Route>
           <Route path='/group' element={<Group />}></Route>
+          <Route path='/talk_session' element={<TalkSession />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
