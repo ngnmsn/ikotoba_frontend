@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import SiteTitle from '../components/SiteTitle';
 
 function Signup() {
@@ -37,13 +39,14 @@ function Signup() {
             </div>
           </div>
           <div className='w-full flex justify-end mt-10'>
-            <button className='w-[3.75rem] h-[1.56rem] rounded-lg bg-green-600 text-white'>
-              <p className='text-sm'>Signup</p>
-            </button>
+            <Link to='/login'>
+              <button className='w-[3.75rem] h-[1.56rem] rounded-lg bg-green-600 text-white'>
+                <p className='text-sm'>Signup</p>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-      
     </div>
   )
 }
