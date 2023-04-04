@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import SiteTitle from '../components/SiteTitle';
 import { ReactComponent as PushBell } from '../assets/push_bell.svg';
 
@@ -30,12 +32,16 @@ function Home() {
             <div className='w-full flex justify-start'>
               <div><p className='text-base'>参加しているグループ</p></div>
             </div>
-            <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
-              <div><p>GroupA</p></div>
-            </button>
-            <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
-              <div><p>GroupB</p></div>
-            </button>
+            <Link to='/group'>
+              <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
+                <div><p>GroupA</p></div>
+              </button>
+            </Link>
+            <Link to='/group'>
+              <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
+                <div><p>GroupB</p></div>
+              </button>
+            </Link>
             <div className='w-full mt-6 flex justify-center'>
               <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
                 <div><p className='text-xl'>&#0043;</p></div>
