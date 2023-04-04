@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import SiteTitle from '../components/SiteTitle';
 
 function Login() {
@@ -29,13 +31,14 @@ function Login() {
             </div>
           </div>
           <div className='w-full flex justify-end mt-10'>
-            <button className='w-[3.75rem] h-[1.56rem] rounded-lg bg-green-600 text-white'>
-              <p className='text-sm'>Login</p>
-            </button>
+            <Link to='/home'>
+              <button className='w-[3.75rem] h-[1.56rem] rounded-lg bg-green-600 text-white'>
+                <p className='text-sm'>Login</p>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-      
     </div>
   )
 }
