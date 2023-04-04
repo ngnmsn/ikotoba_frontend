@@ -36,6 +36,11 @@ function Home() {
             <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
               <div><p>GroupB</p></div>
             </button>
+            <div className='w-full mt-6 flex justify-center'>
+              <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
+                <div><p className='text-xl'>&#0043;</p></div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
