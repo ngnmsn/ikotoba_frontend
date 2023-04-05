@@ -30,7 +30,7 @@ function Group() {
                 <div><p>TalkSession1</p></div>
               </button>
             </Link>
-            <Link to='talk_session'>
+            <Link to='/talk_session'>
               <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
                 <div><p>TalkSession2</p></div>
               </button>

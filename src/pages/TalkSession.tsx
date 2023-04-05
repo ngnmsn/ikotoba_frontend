@@ -1,6 +1,20 @@
+import React, { useCallback, useState } from 'react';
+
 import SiteTitle from '../components/SiteTitle';
+import { ModalPortal }  from '../components/ModalPortal';
+import { TalkInputModal } from '../components/TalkInputModal';
 
 function TalkSession() {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  const onOpen = useCallback(() => {
+    setIsOpen(true);
+  }, [setIsOpen]);
+
+  const onClose = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
+
   return (
     <div className='w-full flex justify-center'>
       <div className='w-[23.5rem]'>
@@ -17,9 +31,14 @@ function TalkSession() {
             <div className='w-full flex justify-start'>
               <div className='w-1/2 flex justify-start'><p className='text-xl'>TalkSession1</p></div>
               <div className='w-1/2 flex justify-end'>
-                <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
+                <button onClick={onOpen} className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
                   <div><p className='text-xl'>&#0043;</p></div>
                 </button>
+                {isOpen && (
+                  <ModalPortal>
+                    <TalkInputModal onClose={onClose}/>
+                  </ModalPortal>
+                )}
               </div>
             </div>
             <div className='w-full h-20 rounded-lg mt-9 pt-1 pl-2 border border-black flex flex-col justify-start'>
