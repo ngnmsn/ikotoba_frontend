@@ -50,7 +50,7 @@ function SecretWordSetting() {
               </div>
             </div>
             <div className='w-full mt-8 flex justify-center'>
-              <Link to=''>
+              <Link to='/secret_word_add'>
                 <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
                   <div><p className='text-xl font-bold'>&#0043;</p></div>
                 </button>

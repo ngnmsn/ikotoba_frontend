@@ -8,6 +8,7 @@ import Group from './pages/Group';
 import TalkSession from './pages/TalkSession';
 import SecretWordSetting from './pages/SecretWordSetting';
 import SecretWordEdit from './pages/SecretWordEdit';
+import SecretWordAdd from './pages/SecretWordAdd';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/talk_session' element={<TalkSession />}></Route>
           <Route path='/secret_word_setting' element={<SecretWordSetting />}></Route>
           <Route path='/secret_word_edit' element={<SecretWordEdit />}></Route>
+          <Route path='/secret_word_add' element={<SecretWordAdd />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
