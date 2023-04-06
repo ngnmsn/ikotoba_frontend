@@ -23,7 +23,7 @@ function SecretWordSetting() {
               <div className='w-full mt-8 flex flex-row'>
                 <div className='w-1/2 flex justify-start'><p className='text-base font-bold'>1</p></div>
                 <div className='w-1/2 flex justify-end'>
-                  <Link to=''>
+                  <Link to='/secret_word_edit'>
                     <button className='w-16 h-6 bg-green-600 text-white rounded-lg'>
                       <p className='text-base font-bold'>Edit</p>
                     </button>
@@ -37,7 +37,7 @@ function SecretWordSetting() {
               <div className='w-full mt-8 flex flex-row'>
                 <div className='w-1/2 flex justify-start'><p className='text-base font-bold'>2</p></div>
                 <div className='w-1/2 flex justify-end'>
-                  <Link to=''>
+                  <Link to='/secret_word_edit'>
                     <button className='w-16 h-6 bg-green-600 text-white rounded-lg'>
                       <p className='text-base font-bold'>Edit</p>
                     </button>
