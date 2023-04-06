@@ -18,9 +18,11 @@ function Group() {
           <div className='w-80 mt-7 flex flex-col'>
             <div className='w-full flex justify-start'>
               <div className='mr-9'><p className='text-xl'>GroupA</p></div>
-              <button className='w-24 h-7 bg-green-600 rounded-lg text-white'>
-                <div><p className='text-base'>合言葉設定</p></div>
-              </button>
+              <Link to='/secret_word_setting'>
+                <button className='w-24 h-7 bg-green-600 rounded-lg text-white'>
+                  <div><p className='text-base'>合言葉設定</p></div>
+                </button>
+              </Link>
             </div>
             <div className='w-full mt-7 flex justify-start'>
               <div><p className='text-base'>トークセッション</p></div>
