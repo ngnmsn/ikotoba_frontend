@@ -1,27 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Top from './pages/Top';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import Group from './pages/Group';
+import TalkSession from './pages/TalkSession';
+import SecretWordSetting from './pages/SecretWordSetting';
+import SecretWordEdit from './pages/SecretWordEdit';
+import SecretWordAdd from './pages/SecretWordAdd';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <div className="bg-yellow-500 rounded-lg text-white font-bold py-2 px-4">
-          Hello Tailwind
-        </div>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Top />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/signup' element={<Signup />}></Route>
+          <Route path='/home' element={<Home />}></Route>
+          <Route path='/group' element={<Group />}></Route>
+          <Route path='/talk_session' element={<TalkSession />}></Route>
+          <Route path='/secret_word_setting' element={<SecretWordSetting />}></Route>
+          <Route path='/secret_word_edit' element={<SecretWordEdit />}></Route>
+          <Route path='/secret_word_add' element={<SecretWordAdd />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
