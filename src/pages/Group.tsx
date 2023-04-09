@@ -43,9 +43,11 @@ function Group() {
               </button>
             </Link>
             <div className='w-full mt-6 flex justify-center'>
-              <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
-                <div><p className='text-xl'>&#0043;</p></div>
-              </button>
+              <Link to='/talk_session_add'>
+                <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
+                  <div><p className='text-xl'>&#0043;</p></div>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
