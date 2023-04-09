@@ -33,7 +33,7 @@ function Login() {
           <div className='w-full flex justify-end mt-10'>
             <Link to='/home'>
               <button className='w-[3.75rem] h-[1.56rem] rounded-lg bg-green-600 text-white'>
-                <p className='text-sm'>Login</p>
+                <p className='text-base'>Login</p>
               </button>
             </Link>
           </div>
