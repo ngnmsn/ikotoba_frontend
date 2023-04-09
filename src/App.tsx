@@ -10,6 +10,7 @@ import SecretWordSetting from './pages/SecretWordSetting';
 import SecretWordEdit from './pages/SecretWordEdit';
 import SecretWordAdd from './pages/SecretWordAdd';
 import GroupAdd from './pages/GroupAdd';
+import GroupEdit from './pages/GroupEdit';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path='/secret_word_edit' element={<SecretWordEdit />}></Route>
           <Route path='/secret_word_add' element={<SecretWordAdd />}></Route>
           <Route path='/group_add' element={<GroupAdd />}></Route>
+          <Route path='/group_edit' element={<GroupEdit />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
