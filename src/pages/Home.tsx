@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import SiteTitle from '../components/SiteTitle';
-import { ReactComponent as PushBell } from '../assets/push_bell.svg';
+import { ReactComponent as Bell } from '../assets/bell.svg';
 
 function Home() {
   return (
@@ -12,8 +12,8 @@ function Home() {
             <SiteTitle />
           </div>
           <div className='w-1/2 mr-5 flex justify-end'>
-            <button>
-              <PushBell />
+            <button className='w-[3.75rem] h-11 rounded-lg bg-green-600 flex justify-center items-center'>
+              <Bell />
             </button>
           </div>
         </div>
