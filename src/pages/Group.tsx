@@ -19,8 +19,13 @@ function Group() {
             <div className='w-full flex justify-start'>
               <div className='mr-9'><p className='text-xl'>GroupA</p></div>
               <Link to='/secret_word_setting'>
-                <button className='w-24 h-7 bg-green-600 rounded-lg text-white'>
+                <button className='w-24 h-7 mr-3 bg-green-600 rounded-lg text-white'>
                   <div><p className='text-base'>合言葉設定</p></div>
+                </button>
+              </Link>
+              <Link to='/group_edit'>
+                <button className=' w-[6.375rem] h-7 bg-green-600 rounded-lg text-white'>
+                  <div><p className='text-base'>グループ設定</p></div>
                 </button>
               </Link>
             </div>

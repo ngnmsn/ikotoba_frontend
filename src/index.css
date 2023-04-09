@@ -531,6 +531,9 @@ video {
 .mt-\[3\.25rem\] {
   margin-top: 3.25rem;
 }
+.mr-3 {
+  margin-right: 0.75rem;
+}
 .flex {
   display: flex;
 }
@@ -626,6 +629,9 @@ video {
 }
 .w-full {
   width: 100%;
+}
+.w-\[6\.375rem\] {
+  width: 6.375rem;
 }
 .grow {
   flex-grow: 1;
