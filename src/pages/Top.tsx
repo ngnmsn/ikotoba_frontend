@@ -1,24 +1,24 @@
-import { Link } from "react-router-dom";
-import SiteTitle from '../components/SiteTitle';
+import { useState, useEffect } from 'react';
+import { supabase } from '../supabaseClient';
+import Login from './Login';
+import Home from './Home';
 
 function Top() {
+  const [session, setSession] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
   return (
-    <div className='w-full'>
-      <div className='w-full mt-24'>
-        <SiteTitle />
-      </div>
-      <div className='w-full pt-12'>
-        <Link to='/login'>
-          <button className='w-[5rem] h-[2rem] mx-4 rounded-lg bg-green-600 text-white'>
-            <p className='text-xl'>Login</p>
-          </button>
-        </Link>
-        <Link to='/signup'>
-          <button className='w-[5rem] h-[2rem] mx-4 rounded-lg bg-green-600 text-white'>
-            <p className='text-xl'>Signup</p>
-          </button>
-        </Link>
-      </div>
+    <div>
+      {!session ? <Login /> : <Home />}
     </div>
   )
 }
