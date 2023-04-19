@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import SiteTitle from '../components/SiteTitle';
 import { ReactComponent as BellOn } from '../assets/bell_on.svg';
 import { ReactComponent as BellOff } from '../assets/bell_off.svg';
+import { supabase } from '../supabaseClient';
 
 const publicVapidKey = 'BMI3rZSRwZLrQFGUNa1MXM1kAilK8Xxv0EJqOyIih4Yghb66_yB7SBp3m9jln1fZyEACR36jxxO43vGt9g2NBLc';
 
-function Home() {
+type Props = {
+  userId: string | null;
+}
+
+type data = {
+  memberid: number;
+  group_table: {
+      groupid: number;
+      groupname: string | null;
+  } | {
+      groupid: number;
+      groupname: string | null;
+  }[] | null;
+}[] | null
+
+function Home(props: Props) {
 
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
+  const [userId, setUserId] = useState<string | null>(props.userId);
+  const [data, setData] = useState<data>(null);
 
   const handlePushSubscription = async () => {
     try {
@@ -35,6 +53,18 @@ function Home() {
       console.error('Unsubscription error:', e);
     }
   };
+
+  useEffect (() => {
+    supabase.from('member_table')
+            .select('memberid, group_table(groupid, groupname)')
+            .eq('userid', userId)
+            .then(({data, error}) => {
+              console.log(data);
+              console.log(error);
+              setData(data);
+            });
+
+  }, [userId]);
 
   return (
     <div className='w-full flex justify-center'>
@@ -71,16 +101,19 @@ function Home() {
             <div className='w-full flex justify-start'>
               <div><p className='text-base'>参加しているグループ</p></div>
             </div>
-            <Link to='/group'>
-              <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
-                <div><p>GroupA</p></div>
-              </button>
-            </Link>
-            <Link to='/group'>
-              <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
-                <div><p>GroupB</p></div>
-              </button>
-            </Link>
+            { data != null &&
+              data.map((group) => {
+                if (group.group_table == null) { return null }
+                if (group.group_table instanceof Array ) { return null }
+                return (
+                  <Link to='/group' key={ group.group_table.groupid }>
+                    <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
+                      <div><p>{ group.group_table.groupname }</p></div>
+                    </button>
+                  </Link>
+                )
+              })
+            }
             <div className='w-full mt-6 flex justify-center'>
               <Link to='/group_add'>
                 <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
