@@ -4,20 +4,37 @@ import { supabase } from '../supabaseClient';
 
 import SiteTitle from '../components/SiteTitle';
 
+type TalkSessionList = {
+  talksessionid: number,
+  sessionname: string,
+  group_table: {
+    groupid: number,
+  }
+}[]
+
 function Group() {
   const params = useParams();
   const [groupId, setGroupId] = useState(params.groupId);
-  const [groupName, setGroupName] = useState<String| null>(null);
+  const [groupName, setGroupName] = useState<string| null>(null);
+  const [talkSessionList, setTalkSessionList] = useState<TalkSessionList| null>(null)
 
   useEffect(() => {
     if (isFinite(Number(groupId))) {
-      supabase.from('talk_session_table')
-      .select('talksessionid, sessionname, group_table(groupid, groupname)')
+      supabase.from('group_table')
+      .select('groupid, groupname')
       .eq('groupid', Number(groupId))
       .then(({data, error}: any) => {
         console.log(data);
         console.log(error);
-        setGroupName(data[0].group_table.groupname);
+        setGroupName(data[0].groupname);
+      });
+      supabase.from('talk_session_table')
+      .select('talksessionid, sessionname, group_table(groupid)')
+      .eq('groupid', Number(groupId))
+      .then(({data, error}: any) => {
+        console.log(data);
+        console.log(error);
+        setTalkSessionList(data);
       });
     }
   }, [groupId]);
@@ -51,16 +68,19 @@ function Group() {
             <div className='w-full mt-7 flex justify-start'>
               <div><p className='text-base'>トークセッション</p></div>
             </div>
-            <Link to='/talk_session'>
-              <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
-                <div><p>TalkSession1</p></div>
-              </button>
-            </Link>
-            <Link to='/talk_session'>
-              <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
-                <div><p>TalkSession2</p></div>
-              </button>
-            </Link>
+            { talkSessionList != null &&
+              talkSessionList.map((talkSession) => {
+                if (talkSession.talksessionid == null) { return null }
+                if (talkSession.sessionname == null ) { return null }
+                return (
+                  <Link to='/talk_session' key={talkSession.talksessionid}>
+                    <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
+                      <div><p>{talkSession.sessionname}</p></div>
+                    </button>
+                  </Link>
+                )
+              })
+            }
             <div className='w-full mt-6 flex justify-center'>
               <Link to='/talk_session_add'>
                 <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
