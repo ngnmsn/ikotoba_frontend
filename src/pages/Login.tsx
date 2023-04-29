@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 
@@ -50,12 +49,10 @@ function Login() {
               </div>
             </div>
             <div className='w-full flex justify-end mt-10'>
-              {/* <Link to='/home'> */}
-                <button className='w-[3.75rem] h-[1.56rem] rounded-lg bg-green-600 text-white'>
-                  {loading ? <p className='text-base'>Loading</p>
-                  : <p className='text-base'>Login</p>}
-                </button>
-              {/* </Link> */}
+              <button className='w-[3.75rem] h-[1.56rem] rounded-lg bg-green-600 text-white'>
+                {loading ? <p className='text-base'>Loading</p>
+                : <p className='text-base'>Login</p>}
+              </button>
             </div>
           </div>
         </div>

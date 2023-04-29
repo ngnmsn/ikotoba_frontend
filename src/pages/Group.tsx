@@ -1,8 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { supabase } from '../supabaseClient';
 
 import SiteTitle from '../components/SiteTitle';
 
 function Group() {
+  const params = useParams();
+  const [groupId, setGroupId] = useState(params.groupId);
+  const [groupName, setGroupName] = useState<String| null>(null);
+
+  useEffect(() => {
+    if (isFinite(Number(groupId))) {
+      supabase.from('talk_session_table')
+      .select('talksessionid, sessionname, group_table(groupid, groupname)')
+      .eq('groupid', Number(groupId))
+      .then(({data, error}: any) => {
+        console.log(data);
+        console.log(error);
+        setGroupName(data[0].group_table.groupname);
+      });
+    }
+  }, [groupId]);
+
   return (
     <div className='w-full flex justify-center'>
       <div className='w-[23.5rem]'>
@@ -17,7 +36,7 @@ function Group() {
         <div className='w-full flex justify-center'>
           <div className='w-80 mt-7 flex flex-col'>
             <div className='w-full flex justify-start'>
-              <div className='mr-9'><p className='text-xl'>GroupA</p></div>
+              <div className='mr-9'><p className='text-xl'>{groupName}</p></div>
               <Link to='/secret_word_setting'>
                 <button className='w-24 h-7 mr-3 bg-green-600 rounded-lg text-white'>
                   <div><p className='text-base'>合言葉設定</p></div>

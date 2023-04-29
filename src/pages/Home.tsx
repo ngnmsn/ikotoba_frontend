@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import SiteTitle from '../components/SiteTitle';
 import { ReactComponent as BellOn } from '../assets/bell_on.svg';
@@ -29,6 +29,7 @@ function Home(props: Props) {
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
   const [userId, setUserId] = useState<string | null>(props.userId);
   const [data, setData] = useState<data>(null);
+  const [groupId, setGroupId] = useState<number| null>(null);
 
   const handlePushSubscription = async () => {
     try {
@@ -54,6 +55,17 @@ function Home(props: Props) {
     }
   };
 
+  const goToGroup = (groupId: number | null) => {
+    setGroupId(groupId);
+    if (groupId == null) {
+      alert('グループIDの取得に失敗しました。');
+      return null
+    }
+    return (
+      <Navigate replace to='/group'/>
+    )
+  }
+
   useEffect (() => {
     supabase.from('member_table')
             .select('memberid, group_table(groupid, groupname)')
@@ -63,7 +75,6 @@ function Home(props: Props) {
               console.log(error);
               setData(data);
             });
-
   }, [userId]);
 
   return (
@@ -105,8 +116,9 @@ function Home(props: Props) {
               data.map((group) => {
                 if (group.group_table == null) { return null }
                 if (group.group_table instanceof Array ) { return null }
+                if (group.group_table.groupid == null) { return null }
                 return (
-                  <Link to='/group' key={ group.group_table.groupid }>
+                  <Link to={'/group/' + group.group_table.groupid} key={ group.group_table.groupid }>
                     <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
                       <div><p>{ group.group_table.groupname }</p></div>
                     </button>
