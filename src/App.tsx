@@ -42,7 +42,7 @@ function App() {
           <Route path='/' element={session ? <Navigate replace to='/home'/> : <Login />}></Route>
           <Route path='/home' element={session ? <Home userId={userId}/> : <Navigate replace to='/'/>}></Route>
           <Route path='/group/:groupId' element={<Group />}></Route>
-          <Route path='/talk_session' element={<TalkSession />}></Route>
+          <Route path='/talk_session/:talkSessionId' element={<TalkSession />}></Route>
           <Route path='/secret_word_setting' element={<SecretWordSetting />}></Route>
           <Route path='/secret_word_edit' element={<SecretWordEdit />}></Route>
           <Route path='/secret_word_add' element={<SecretWordAdd />}></Route>
