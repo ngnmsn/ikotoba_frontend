@@ -12,24 +12,20 @@ type Props = {
   userId: string | null;
 }
 
-type data = {
+type GroupList = {
   memberid: number;
   group_table: {
       groupid: number;
-      groupname: string | null;
-  } | {
-      groupid: number;
-      groupname: string | null;
-  }[] | null;
-}[] | null
+      groupname: string;
+  }
+}[]
 
 function Home(props: Props) {
 
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
-  const [userId, setUserId] = useState<string | null>(props.userId);
-  const [data, setData] = useState<data>(null);
-  const [groupId, setGroupId] = useState<number| null>(null);
+  const [userId, setUserId] = useState<string|null>(props.userId);
+  const [groupList, setGroupList] = useState<GroupList|null>(null);
 
   const handlePushSubscription = async () => {
     try {
@@ -55,25 +51,14 @@ function Home(props: Props) {
     }
   };
 
-  const goToGroup = (groupId: number | null) => {
-    setGroupId(groupId);
-    if (groupId == null) {
-      alert('グループIDの取得に失敗しました。');
-      return null
-    }
-    return (
-      <Navigate replace to='/group'/>
-    )
-  }
-
   useEffect (() => {
     supabase.from('member_table')
             .select('memberid, group_table(groupid, groupname)')
             .eq('userid', userId)
-            .then(({data, error}) => {
+            .then(({data, error}: any) => {
               console.log(data);
               console.log(error);
-              setData(data);
+              setGroupList(data);
             });
   }, [userId]);
 
@@ -112,11 +97,10 @@ function Home(props: Props) {
             <div className='w-full flex justify-start'>
               <div><p className='text-base'>参加しているグループ</p></div>
             </div>
-            { data != null &&
-              data.map((group) => {
-                if (group.group_table == null) { return null }
-                if (group.group_table instanceof Array ) { return null }
+            { groupList != null &&
+              groupList.map((group) => {
                 if (group.group_table.groupid == null) { return null }
+                if (group.group_table.groupname == null) { return null }
                 return (
                   <Link to={'/group/' + group.group_table.groupid} key={ group.group_table.groupid }>
                     <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
