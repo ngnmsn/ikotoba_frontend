@@ -73,7 +73,7 @@ function Group() {
                 if (talkSession.talksessionid == null) { return null }
                 if (talkSession.sessionname == null ) { return null }
                 return (
-                  <Link to='/talk_session' key={talkSession.talksessionid}>
+                  <Link to={'/talk_session/' + talkSession.talksessionid } key={talkSession.talksessionid}>
                     <button className='w-full h-24 rounded-lg mt-4 p-1 border border-black flex items-start'>
                       <div><p>{talkSession.sessionname}</p></div>
                     </button>

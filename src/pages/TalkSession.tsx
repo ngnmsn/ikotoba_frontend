@@ -1,11 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 
 import SiteTitle from '../components/SiteTitle';
 import { ModalPortal }  from '../components/ModalPortal';
 import { TalkInputModal } from '../components/TalkInputModal';
 
 function TalkSession() {
+  const params = useParams();
+  const [talkSessionId, setTalkSession] = useState(params.talkSessionId);
+  const [sessionName, setSessionName] = useState<string|null>(null);
   const [isOpen, setIsOpen] = useState(false);
   
   const onOpen = useCallback(() => {
@@ -15,6 +19,19 @@ function TalkSession() {
   const onClose = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
+
+  useEffect(() => {
+    if (isFinite(Number(talkSessionId))) {
+      supabase.from('talk_session_table')
+      .select('talksessionid, sessionname')
+      .eq('talksessionid', Number(talkSessionId))
+      .then(({data, error}: any) => {
+        console.log(data);
+        console.log(error);
+        setSessionName(data[0].sessionname);
+      });
+    }
+  }, [talkSessionId]);
 
   return (
     <div className='w-full flex justify-center'>
@@ -30,7 +47,7 @@ function TalkSession() {
         <div className='w-full flex justify-center'>
           <div className='w-80 mt-7 flex flex-col'>
             <div className='w-full flex justify-start'>
-              <div className='w-1/2 flex justify-start'><p className='text-xl'>TalkSession1</p></div>
+              <div className='w-1/2 flex justify-start'><p className='text-xl'>{sessionName}</p></div>
               <div className='w-1/4 flex justify-center'>
                 <Link to='/talk_session_edit'>
                   <button className='w-16 h-6 bg-green-600 text-white rounded-lg'>
