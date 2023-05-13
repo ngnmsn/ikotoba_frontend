@@ -7,9 +7,6 @@ import SiteTitle from '../components/SiteTitle';
 type TalkSessionList = {
   talksessionid: number,
   sessionname: string,
-  group_table: {
-    groupid: number,
-  }
 }[]
 
 function Group() {
@@ -29,7 +26,7 @@ function Group() {
         setGroupName(data[0].groupname);
       });
       supabase.from('talk_session_table')
-      .select('talksessionid, sessionname, group_table(groupid)')
+      .select('talksessionid, sessionname, groupid')
       .eq('groupid', Number(groupId))
       .then(({data, error}: any) => {
         console.log(data);
@@ -82,7 +79,7 @@ function Group() {
               })
             }
             <div className='w-full mt-6 flex justify-center'>
-              <Link to='/talk_session_add'>
+              <Link to={'/talk_session_add/' + groupId}>
                 <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
                   <div><p className='text-xl'>&#0043;</p></div>
                 </button>

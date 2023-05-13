@@ -80,6 +80,32 @@ export interface Database {
           userid?: string
         }
       }
+      talk_session_table: {
+        Row: {
+          createdate: string | null
+          detail: string | null
+          groupid: number
+          sessionname: string | null
+          talksessionid: number
+          updatedate: string | null
+        }
+        Insert: {
+          createdate?: string | null
+          detail?: string | null
+          groupid?: number
+          sessionname?: string | null
+          talksessionid?: number
+          updatedate?: string | null
+        }
+        Update: {
+          createdate?: string | null
+          detail?: string | null
+          groupid?: number
+          sessionname?: string | null
+          talksessionid?: number
+          updatedate?: string | null
+        }
+      }
       user_table: {
         Row: {
           createdate: string | null
