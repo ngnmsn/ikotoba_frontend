@@ -37,18 +37,21 @@ export interface Database {
       group_table: {
         Row: {
           createdate: string | null
+          detail: string | null
           groupid: number
           groupname: string | null
           updatedate: string | null
         }
         Insert: {
           createdate?: string | null
+          detail?: string | null
           groupid?: number
           groupname?: string | null
           updatedate?: string | null
         }
         Update: {
           createdate?: string | null
+          detail?: string | null
           groupid?: number
           groupname?: string | null
           updatedate?: string | null
