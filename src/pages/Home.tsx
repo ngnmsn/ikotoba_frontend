@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import SiteTitle from '../components/SiteTitle';
 import { ReactComponent as BellOn } from '../assets/bell_on.svg';
