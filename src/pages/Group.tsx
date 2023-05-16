@@ -56,7 +56,7 @@ function Group() {
                   <div><p className='text-base'>合言葉設定</p></div>
                 </button>
               </Link>
-              <Link to='/group_edit'>
+              <Link to={'/group_edit/' + groupId}>
                 <button className=' w-[6.375rem] h-7 bg-green-600 rounded-lg text-white'>
                   <div><p className='text-base'>グループ設定</p></div>
                 </button>
