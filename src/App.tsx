@@ -49,7 +49,7 @@ function App() {
           <Route path='/group_add' element={<GroupAdd userId={userId} />}></Route>
           <Route path='/group_edit/:groupId' element={<GroupEdit />}></Route>
           <Route path='/talk_session_add/:groupId' element={<TalkSessionAdd />}></Route>
-          <Route path='/talk_session_edit' element={<TalkSessionEdit />}></Route>
+          <Route path='/talk_session_edit/:talkSessionId' element={<TalkSessionEdit />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
