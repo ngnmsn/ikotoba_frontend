@@ -49,7 +49,7 @@ function TalkSession() {
             <div className='w-full flex justify-start'>
               <div className='w-1/2 flex justify-start'><p className='text-xl'>{sessionName}</p></div>
               <div className='w-1/4 flex justify-center'>
-                <Link to='/talk_session_edit'>
+                <Link to={ '/talk_session_edit/'+ talkSessionId }>
                   <button className='w-16 h-6 bg-green-600 text-white rounded-lg'>
                     <p className='text-base'>Edit</p>
                   </button>

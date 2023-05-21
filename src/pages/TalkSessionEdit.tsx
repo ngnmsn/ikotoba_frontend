@@ -13,7 +13,7 @@ function Form() {
 
   const hundleEditTalkSession = async(event:any) => {
     event.preventDefault();
-    await supabase.from('talk_session_table').update({sessionname: sessionName, detail: detail, updatedate: new Date().toISOString()}).eq('talkSessionId', talkSessionId).select()
+    await supabase.from('talk_session_table').update({sessionname: sessionName, detail: detail, updatedate: new Date().toISOString()}).eq('talksessionid', talkSessionId).select()
     .then(({data, error}: any) => {
       console.log(data);
       console.log(error);
@@ -26,6 +26,7 @@ function Form() {
         return;
       }
       alert('トークセッションを編集しました。');
+      console.log(talkSessionId)
       navigation('/talk_session/' + talkSessionId);
     });
   }
@@ -67,11 +68,7 @@ function Form() {
             </Link>
           </div>
           <div className='w-1/2 flex justify-end'>
-            <Link to='/talk_session'>
-              <button className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center'>
-                <div><p className='text-base font-bold'>OK</p></div>
-              </button>
-            </Link>
+            <input type='submit' value='OK' className='w-16 h-6 bg-green-600 rounded-lg text-white flex items-center justify-center text-base font-bold' />
           </div>
         </div>
       </form>
