@@ -39,6 +39,8 @@ function Form(props: Props) {
   }
   
   useEffect(() => {
+    console.log(groupId);
+    console.log(userId);
     if (userId != null && groupId != null) {
       supabase.from('member_table')
               .select('memberid')
@@ -62,9 +64,6 @@ function Form(props: Props) {
           <div className='mr-9'><p className='text-xl'>合言葉追加</p></div>
         </div>
         <div className='w-full mt-2 flex flex-col'>
-          {/* <div className='w-full mt-8 flex flex-row'>
-            <div className='w-1/2 flex justify-start'><p className='text-base font-bold'>3</p></div>
-          </div> */}
           <div className='w-full mt-3 flex justify-start'><p className='text-sm'>タイトル</p></div>
           <div className='w-full mt-2 flex justify-start'><input onChange={(e) => setSecretWordTitle(e.target.value)} value={secretWordTitle} type='text' className='w-full h-7 rounded-lg border border-black'></input></div>
           <div className='w-full mt-3 flex justify-start'><p className='text-sm'>メッセージ</p></div>
