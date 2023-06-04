@@ -33,7 +33,7 @@ function App() {
       }
     })
 
-  }, [session, userId])
+  }, [userId])
 
   return (
     <div className="App">
