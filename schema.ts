@@ -83,6 +83,47 @@ export interface Database {
           userid?: string
         }
       }
+      secret_word_table: {
+        Row: {
+          createdate: string | null
+          creatememberid: number | null
+          description: string | null
+          groupid: number
+          invalid: boolean | null
+          meaning: string | null
+          secretwordbody: string | null
+          secretwordid: number
+          secretwordtitle: string | null
+          updatedate: string | null
+          updatememberid: number | null
+        }
+        Insert: {
+          createdate?: string | null
+          creatememberid?: number | null
+          description?: string | null
+          groupid?: number
+          invalid?: boolean | null
+          meaning?: string | null
+          secretwordbody?: string | null
+          secretwordid?: number
+          secretwordtitle?: string | null
+          updatedate?: string | null
+          updatememberid?: number | null
+        }
+        Update: {
+          createdate?: string | null
+          creatememberid?: number | null
+          description?: string | null
+          groupid?: number
+          invalid?: boolean | null
+          meaning?: string | null
+          secretwordbody?: string | null
+          secretwordid?: number
+          secretwordtitle?: string | null
+          updatedate?: string | null
+          updatememberid?: number | null
+        }
+      }
       talk_session_table: {
         Row: {
           createdate: string | null
