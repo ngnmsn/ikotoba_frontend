@@ -44,7 +44,7 @@ function App() {
           <Route path='/group/:groupId' element={<Group />}></Route>
           <Route path='/talk_session/:talkSessionId' element={<TalkSession />}></Route>
           <Route path='/secret_word_setting/:groupId' element={<SecretWordSetting />}></Route>
-          <Route path='/secret_word_edit/:secretWordId' element={<SecretWordEdit />}></Route>
+          <Route path='/secret_word_edit' element={<SecretWordEdit userId={userId}/>}></Route>
           <Route path='/secret_word_add/:groupId' element={<SecretWordAdd userId={userId} />}></Route>
           <Route path='/group_add' element={<GroupAdd userId={userId} />}></Route>
           <Route path='/group_edit/:groupId' element={<GroupEdit />}></Route>
