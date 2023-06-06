@@ -6,7 +6,58 @@ import SiteTitle from '../components/SiteTitle';
 import { ModalPortal }  from '../components/ModalPortal';
 import { TalkInputModal } from '../components/TalkInputModal';
 
-function TalkSession() {
+type PropsTalkRecord = {
+  talkSessionId: string | undefined,
+}
+
+const TalkRecord = React.memo((propsTalkRecordops: PropsTalkRecord) => {
+  const [talkSessionId, setTalkSessionId] = useState(propsTalkRecordops.talkSessionId);
+  const [talkRecordList, setTalkRecordList] = useState<any[]>([]);
+  
+  useEffect(() => {
+    if (isFinite(Number(talkSessionId))) {
+      supabase.from('talk_record_table')
+              .select('talkrecordid, createdate, secret_word_table(secretwordtitle, secretwordbody)')
+              .eq('talksessionid', Number(talkSessionId))
+              .then(({data, error}: any) => {
+                console.log(data);
+                console.log(error);
+                data.sort((a: any, b: any) => {
+                  if (a.createdate > b.createdate) {
+                    return -1;
+                  }
+                  if (a.createdate < b.createdate) {
+                    return 1;
+                  }
+                  return 0
+                })
+                setTalkRecordList(data);
+              });
+    }
+  }, [talkSessionId]);
+
+  return (
+    <div>
+      { talkRecordList != null &&
+        talkRecordList.map((talkRecord) => {
+          return (
+            <div key={talkRecord.talkrecordid} className='w-full h-20 rounded-lg mt-9 pt-1 pl-2 border border-black flex flex-col justify-start'>
+              <div className='flex justify-start'><p className='text-base'>{talkRecord.secret_word_table.secretwordtitle}</p></div>
+              <div className='flex justify-start'><p className='text-sm'>{talkRecord.secret_word_table.secretwordbody}</p></div>
+            </div>
+          )
+        })
+
+      }
+    </div>
+  )
+})
+
+type PropsTalkSession = {
+  userId: string | null;
+}
+
+function TalkSession(propsTalkSession: PropsTalkSession) {
   const params = useParams();
   const [talkSessionId, setTalkSession] = useState(params.talkSessionId);
   const [sessionName, setSessionName] = useState<string|null>(null);
@@ -61,19 +112,12 @@ function TalkSession() {
                 </button>
                 {isOpen && (
                   <ModalPortal>
-                    <TalkInputModal onClose={onClose}/>
+                    <TalkInputModal onClose={onClose} talkSessionId={talkSessionId} userId={propsTalkSession.userId} />
                   </ModalPortal>
                 )}
               </div>
             </div>
-            <div className='w-full h-20 rounded-lg mt-9 pt-1 pl-2 border border-black flex flex-col justify-start'>
-              <div className='flex justify-start'><p className='text-base'>title</p></div>
-              <div className='flex justify-start'><p className='text-sm'>message</p></div>
-            </div>
-            <div className='w-full h-20 rounded-lg mt-9 pt-1 pl-2 border border-black flex flex-col justify-start'>
-              <div className='flex justify-start'><p className='text-base'>title</p></div>
-              <div className='flex justify-start'><p className='text-sm'>message</p></div>
-            </div>
+            <TalkRecord talkSessionId={talkSessionId}/>
           </div>
         </div>
       </div>
