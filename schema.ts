@@ -124,6 +124,35 @@ export interface Database {
           updatememberid?: number | null
         }
       }
+      talk_record_table: {
+        Row: {
+          cancelflg: boolean | null
+          createdate: string | null
+          creatememberid: number
+          secretwordid: number
+          talkrecordid: number
+          talksessionid: number
+          updatedate: string | null
+        }
+        Insert: {
+          cancelflg?: boolean | null
+          createdate?: string | null
+          creatememberid?: number
+          secretwordid?: number
+          talkrecordid?: number
+          talksessionid?: number
+          updatedate?: string | null
+        }
+        Update: {
+          cancelflg?: boolean | null
+          createdate?: string | null
+          creatememberid?: number
+          secretwordid?: number
+          talkrecordid?: number
+          talksessionid?: number
+          updatedate?: string | null
+        }
+      }
       talk_session_table: {
         Row: {
           createdate: string | null
