@@ -36,9 +36,41 @@ function Home(props: Props) {
       });
       setSubscription(pushSubscription);
       setIsSubscribed(true);
+      await supabase.from('device_table')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('userid', userId)
+                    .then(async ({count, error}: any) => {
+                      console.log(count);
+                      if ( count === 0) {
+                        await supabase.from('device_table')
+                                      .insert([{pushsubscription: pushSubscription.toJSON(), userid: userId, createdate: new Date().toISOString(), updatedate: new Date().toISOString()}])
+                                      .select()
+                                      .then(({data, error}) => {
+                                        console.log(data);
+                                        console.log(error);
+                                        if (error != null) {
+                                          alert('プッシュ通知登録処理でエラーが発生しました。\nリトライしてください。');
+                                        }
+                                      });
+                      } else if ( count === 1) {
+                        await supabase.from('device_table')
+                                      .update({pushsubscription: pushSubscription.toJSON(), updatedate: new Date().toISOString()})
+                                      .eq('userid', userId)
+                                      .select()
+                                      .then(({data, error}) => {
+                                        console.log(data);
+                                        console.log(error);
+                                        if (error != null) {
+                                          alert('プッシュ通知登録処理でエラーが発生しました。\nリトライしてください。');
+                                        }
+                                      });
+                      }
+                    });
+      
     } catch (e) {
       console.error('Subscription error:', e);
     }
+    
   }
 
   const handlePushUnsubscribe = async () => {
