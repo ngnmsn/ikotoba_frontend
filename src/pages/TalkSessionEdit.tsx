@@ -61,7 +61,7 @@ function Form() {
         </div>
         <div className='w-full mt-8 flex flex-row'>
           <div className='w-1/2 flex justify-start'>
-            <Link to='/talk_session'>
+            <Link to={'/talk_session/' + talkSessionId}>
               <button className='w-16 h-6 rounded-lg border border-black bg-white flex items-center justify-center'>
                 <div><p className='text-base'>Cancel</p></div>
               </button>
