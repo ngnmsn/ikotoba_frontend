@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import OneSignal from 'react-onesignal'
 
 import SiteTitle from '../components/SiteTitle';
 import { ReactComponent as BellOn } from '../assets/bell_on.svg';
 import { ReactComponent as BellOff } from '../assets/bell_off.svg';
 import { supabase } from '../supabaseClient';
 
-const publicVapidKey = 'BMI3rZSRwZLrQFGUNa1MXM1kAilK8Xxv0EJqOyIih4Yghb66_yB7SBp3m9jln1fZyEACR36jxxO43vGt9g2NBLc';
+const oneSignalAppId = process.env.REACT_APP_ONESIGNAL_APP_ID!
 
 type Props = {
   userId: string | null;
@@ -26,47 +27,58 @@ function Home(props: Props) {
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
   const [userId, setUserId] = useState<string|null>(props.userId);
   const [groupList, setGroupList] = useState<GroupList|null>(null);
+  const [oneSignalInitialized, setOneSignalInitialized] = useState<boolean>(false);
 
   const handlePushSubscription = async () => {
     try {
-      const registration = await navigator.serviceWorker.ready;
-      const pushSubscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
-      });
-      setSubscription(pushSubscription);
-      setIsSubscribed(true);
-      await supabase.from('device_table')
-                    .select('*', { count: 'exact', head: true })
-                    .eq('userid', userId)
-                    .then(async ({count, error}: any) => {
-                      console.log(count);
-                      if ( count === 0) {
-                        await supabase.from('device_table')
-                                      .insert([{pushsubscription: pushSubscription.toJSON(), userid: userId, createdate: new Date().toISOString(), updatedate: new Date().toISOString()}])
-                                      .select()
-                                      .then(({data, error}) => {
-                                        console.log(data);
-                                        console.log(error);
-                                        if (error != null) {
-                                          alert('プッシュ通知登録処理でエラーが発生しました。\nリトライしてください。');
-                                        }
-                                      });
-                      } else if ( count === 1) {
-                        await supabase.from('device_table')
-                                      .update({pushsubscription: pushSubscription.toJSON(), updatedate: new Date().toISOString()})
-                                      .eq('userid', userId)
-                                      .select()
-                                      .then(({data, error}) => {
-                                        console.log(data);
-                                        console.log(error);
-                                        if (error != null) {
-                                          alert('プッシュ通知登録処理でエラーが発生しました。\nリトライしてください。');
-                                        }
-                                      });
-                      }
-                    });
-      
+      // const { data, error } = await supabase.functions.invoke('get-vapidpublickey',  {
+      //   headers: {
+      //     "Authorization": 'Bearer ' + process.env.REACT_APP_SUPABASE_ANON_KEY
+      //   }
+      // });
+      // console.log(data);
+      // console.log(error);
+      // const registration = await navigator.serviceWorker.ready;
+      // const pushSubscription = await registration.pushManager.subscribe({
+      //   userVisibleOnly: true,
+      //   applicationServerKey: urlBase64ToUint8Array(data.vapidkeypublic),
+      // });
+      // setSubscription(pushSubscription);
+      // setIsSubscribed(true);
+      // await supabase.from('device_table')
+      //               .select('*', { count: 'exact', head: true })
+      //               .eq('userid', userId)
+      //               .then(async ({count, error}: any) => {
+      //                 console.log(count);
+      //                 if ( count === 0) {
+      //                   await supabase.from('device_table')
+      //                                 .insert([{pushsubscription: pushSubscription.toJSON(), userid: userId, createdate: new Date().toISOString(), updatedate: new Date().toISOString()}])
+      //                                 .select()
+      //                                 .then(({data, error}) => {
+      //                                   console.log(data);
+      //                                   console.log(error);
+      //                                   if (error != null) {
+      //                                     alert('プッシュ通知登録処理でエラーが発生しました。\nリトライしてください。');
+      //                                   }
+      //                                 });
+      //                 } else if ( count === 1) {
+      //                   await supabase.from('device_table')
+      //                                 .update({pushsubscription: pushSubscription.toJSON(), updatedate: new Date().toISOString()})
+      //                                 .eq('userid', userId)
+      //                                 .select()
+      //                                 .then(({data, error}) => {
+      //                                   console.log(data);
+      //                                   console.log(error);
+      //                                   if (error != null) {
+      //                                     alert('プッシュ通知登録処理でエラーが発生しました。\nリトライしてください。');
+      //                                   }
+      //                                 });
+      //                 }
+      //               });
+      if (userId) {
+        initializeOneSignal(userId);
+        setIsSubscribed(true);
+      }
     } catch (e) {
       console.error('Subscription error:', e);
     }
@@ -82,6 +94,22 @@ function Home(props: Props) {
       console.error('Unsubscription error:', e);
     }
   };
+
+  const initializeOneSignal = async (uid: string) => {
+    if (oneSignalInitialized) {
+      return
+    }
+    setOneSignalInitialized(true)
+    await OneSignal.init({
+      appId: oneSignalAppId,
+      notifyButton: {
+        enable: true,
+      },
+      allowLocalhostAsSecureOrigin: true,
+    })
+
+    await OneSignal.setExternalUserId(uid);
+  }
 
   useEffect (() => {
     supabase.from('member_table')
