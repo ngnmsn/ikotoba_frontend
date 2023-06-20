@@ -2,7 +2,7 @@
   "name": "ikotoba_frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ngnmsn.github.io/ikotoba_frontend/",
+  "homepage": "https://ngnmsn.github.io/ikotoba_frontend",
   "dependencies": {
     "@supabase/supabase-js": "^2.20.0",
     "@testing-library/jest-dom": "^5.16.5",
