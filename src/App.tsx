@@ -36,8 +36,8 @@ function App() {
       notifyButton: {
         enable: true,
       },
-      serviceWorkerParam: { scope: '/ikotoba_frontend' },
-      serviceWorkerPath: 'ikotoba_frontend/',
+      serviceWorkerParam: { scope: '/ikotoba_frontend/' },
+      serviceWorkerPath: 'ikotoba_frontend/OneSignalSDKWorker.js',
       allowLocalhostAsSecureOrigin: true,
     })
 
