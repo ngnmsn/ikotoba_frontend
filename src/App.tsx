@@ -31,6 +31,7 @@ function App() {
       return
     }
     setOneSignalInitialized(true)
+    OneSignal.SERVICE_WORKER_PATH = () => 'ikotoba_frontend/OneSignalSDKWorker.js';
     await OneSignal.init({
       appId: oneSignalAppId,
       notifyButton: {
