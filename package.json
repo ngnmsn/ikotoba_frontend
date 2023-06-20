@@ -27,6 +27,7 @@
     "build:tailwind": "postcss src/index.tailwind.css -o src/index.css",
     "prebuild": "npm run build:tailwind",
     "build": "react-scripts build",
+    "deploy": "run-s prebuild build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
