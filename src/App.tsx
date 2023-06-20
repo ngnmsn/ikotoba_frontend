@@ -36,7 +36,8 @@ function App() {
       notifyButton: {
         enable: true,
       },
-      path: 'ikotoba_frontend/',
+      serviceWorkerParam: { scope: 'ikotoba_frontend/' },
+      serviceWorkerPath: 'ikotoba_frontend/',
       allowLocalhostAsSecureOrigin: true,
     })
 
