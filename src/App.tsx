@@ -36,7 +36,7 @@ function App() {
       notifyButton: {
         enable: true,
       },
-      path: 'ikotoba_frontend/OneSignalSDKWorker.js',
+      path: 'ikotoba_frontend/',
       allowLocalhostAsSecureOrigin: true,
     })
 
