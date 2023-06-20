@@ -33,9 +33,10 @@ jobs:
           node-version: 18
       - name: build
         run: npm ci && npm run deploy
-        env: REACT_APP_SUPABASE_URL: ${{ secrets.<REACT_APP_SUPABASE_URL> }}
-        env: REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.<REACT_APP_SUPABASE_ANON_KEY> }}
-        env: REACT_APP_ONESIGNAL_APP_ID: ${{ secrets.<REACT_APP_ONESIGNAL_APP_ID> }}
+        env:
+          REACT_APP_SUPABASE_URL: ${{ secrets.REACT_APP_SUPABASE_URL }}
+          REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}
+          REACT_APP_ONESIGNAL_APP_ID: ${{ secrets.REACT_APP_ONESIGNAL_APP_ID }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
