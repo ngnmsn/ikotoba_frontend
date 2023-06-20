@@ -36,7 +36,7 @@ export const TalkInputModal = (props: Props) => {
                       alert('データの受信に失敗しました。');
                       return;
                     }
-                    alert('メッセージを送信しました。');
+                    // alert('メッセージを送信しました。');
                     return props.onClose();
                   });
   }
