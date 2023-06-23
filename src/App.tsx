@@ -38,7 +38,7 @@ function App() {
       },
       serviceWorkerParam: { scope: '/ikotoba_frontend/' },
       serviceWorkerPath: 'ikotoba_frontend/OneSignalSDKWorker.js',
-      allowLocalhostAsSecureOrigin: true,
+      // allowLocalhostAsSecureOrigin: true,
     })
 
     await OneSignal.setExternalUserId(uid)
