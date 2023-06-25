@@ -31,16 +31,17 @@ function App() {
       return
     }
     setOneSignalInitialized(true)
-    await OneSignal.init({
+    
+    OneSignal.init({
       appId: oneSignalAppId,
       notifyButton: {
         enable: true,
       },
-      serviceWorkerParam: { scope: '/ikotoba_frontend/' },
-      serviceWorkerPath: 'ikotoba_frontend/OneSignalSDKWorker.js',
-      // allowLocalhostAsSecureOrigin: true,
+      // serviceWorkerParam: { scope: 'localhost:3000/' },
+      // serviceWorkerPath: 'OneSignalSDKWorker.js',
+      allowLocalhostAsSecureOrigin: true,
     })
-
+    OneSignal.showSlidedownPrompt();
     await OneSignal.setExternalUserId(uid)
   }
 
