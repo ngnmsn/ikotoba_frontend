@@ -31,17 +31,24 @@ function App() {
       return
     }
     setOneSignalInitialized(true)
-    
-    OneSignal.init({
-      appId: oneSignalAppId,
-      notifyButton: {
-        enable: true,
-      },
-      // serviceWorkerParam: { scope: 'localhost:3000/' },
-      // serviceWorkerPath: 'OneSignalSDKWorker.js',
-      allowLocalhostAsSecureOrigin: true,
-    })
-    OneSignal.showSlidedownPrompt();
+    if (process.env.NODE_ENV === 'development') {
+      OneSignal.init({
+        appId: oneSignalAppId,
+        notifyButton: {
+          enable: true,
+        },
+        allowLocalhostAsSecureOrigin: true,
+      })
+    } else if (process.env.NODE_ENV === 'production') {
+      OneSignal.init({
+        appId: oneSignalAppId,
+        notifyButton: {
+          enable: true,
+        },
+        serviceWorkerParam: { scope: '/ikotoba_frontend/' },
+        serviceWorkerPath: '/ikotoba_frontend/OneSignalSDKWorker.js',
+      })
+    }
     await OneSignal.setExternalUserId(uid)
   }
 
