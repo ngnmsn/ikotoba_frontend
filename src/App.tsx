@@ -46,7 +46,7 @@ function App() {
           enable: true,
         },
         serviceWorkerParam: { scope: '/ikotoba_frontend/' },
-        serviceWorkerPath: 'ngnmsn.github.io/ikotoba_frontend/OneSignalSDKWorker.js',
+        serviceWorkerPath: 'ikotoba_frontend/OneSignalSDKWorker.js',
       })
     }
     await OneSignal.setExternalUserId(uid)
