@@ -37,8 +37,8 @@ function App() {
       notifyButton: {
         enable: true,
       },
-      // serviceWorkerParam: { scope: 'localhost:3000/' },
-      // serviceWorkerPath: 'OneSignalSDKWorker.js',
+      serviceWorkerParam: { scope: 'ikotoba_frontend/' },
+      serviceWorkerPath: '/ikotoba_frontend/OneSignalSDKWorker.js',
       allowLocalhostAsSecureOrigin: true,
     })
     OneSignal.showSlidedownPrompt();
