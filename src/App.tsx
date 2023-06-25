@@ -73,8 +73,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={session ? <Navigate replace to='/home'/> : <Login />}></Route>
           <Route path='/home' element={session ? <Home userId={userId}/> : <Navigate replace to='/'/>}></Route>
