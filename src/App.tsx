@@ -45,7 +45,7 @@ function App() {
         notifyButton: {
           enable: true,
         },
-        serviceWorkerParam: { scope: 'ngnmsn.github.io/ikotoba_frontend/' },
+        serviceWorkerParam: { scope: 'ikotoba_frontend/' },
         serviceWorkerPath: 'ngnmsn.github.io/ikotoba_frontend/OneSignalSDKWorker.js',
       })
     }
