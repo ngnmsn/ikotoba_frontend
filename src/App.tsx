@@ -31,16 +31,17 @@ function App() {
       return
     }
     setOneSignalInitialized(true)
-    await OneSignal.init({
+    
+    OneSignal.init({
       appId: oneSignalAppId,
       notifyButton: {
         enable: true,
       },
-      serviceWorkerParam: { scope: '/ikotoba_frontend/' },
-      serviceWorkerPath: 'ikotoba_frontend/OneSignalSDKWorker.js',
-      // allowLocalhostAsSecureOrigin: true,
+      // serviceWorkerParam: { scope: 'localhost:3000/' },
+      // serviceWorkerPath: 'OneSignalSDKWorker.js',
+      allowLocalhostAsSecureOrigin: true,
     })
-
+    OneSignal.showSlidedownPrompt();
     await OneSignal.setExternalUserId(uid)
   }
 
@@ -72,7 +73,8 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={session ? <Navigate replace to='/home'/> : <Login />}></Route>
           <Route path='/home' element={session ? <Home userId={userId}/> : <Navigate replace to='/'/>}></Route>
