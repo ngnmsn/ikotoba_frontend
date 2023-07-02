@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 
 type Props = {
-  mailAddress : string
+  mailAddress : string,
+  from : string
 }
 
 function OnetimePasswordForm(props: Props) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState(props.mailAddress);
   const [token, setToken] = useState<string>('');
+  const [from, setFrom] = useState<string>(props.from);
   const navigation = useNavigate();
 
   const handleOnetimePassword = async (event: any) => {
@@ -27,7 +29,7 @@ function OnetimePasswordForm(props: Props) {
     if (error) {
       alert(error.message)
     } else {
-      navigation('/');
+      navigation(from);
     }
     setLoading(false)
   }

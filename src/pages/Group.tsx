@@ -62,6 +62,18 @@ function Group() {
                 </button>
               </Link>
             </div>
+            <div className='w-full flex justify-center'>
+              <div className='w-80 h-36 mt-[3.25rem] flex flex-col'>
+                <div className='w-full flex justify-start'>
+                  <div><p className='text-base'>グループ参加用QRコード表示</p></div>
+                </div>
+                <div className='grow flex flex-row justify-center items-center'>
+                  <Link to={ '/qrcode_group_join/'+ groupId }>
+                    <button className='w-[6.68rem] h-[2.75rem] bg-green-600 rounded-lg text-white'><p>QR表示</p></button>
+                  </Link>
+                </div>
+              </div>
+            </div>
             <div className='w-full mt-7 flex justify-start'>
               <div><p className='text-base'>トークセッション</p></div>
             </div>
