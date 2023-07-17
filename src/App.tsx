@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import OneSignal from 'react-onesignal'
@@ -90,7 +90,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <Routes>
           <Route path='/login' element={session ? <Navigate replace to='/home'/> : <Login />}></Route>
           <Route path='/' element={session ? <Navigate replace to='/home'/> : <RedirectLogin />}></Route>
@@ -107,7 +107,7 @@ function App() {
           <Route path='/qrcode_group_join/:groupId' element={session ? <QRCodeForGroupJoin /> : <RedirectLogin />}></Route>
           <Route path='/group_join/:groupId' element={session ? <GroupJoin userId={userId}/> : <RedirectLogin />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
