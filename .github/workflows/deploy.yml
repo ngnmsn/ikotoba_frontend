@@ -38,7 +38,7 @@ jobs:
           REACT_APP_SUPABASE_URL: ${{ secrets.REACT_APP_SUPABASE_URL }}
           REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}
           REACT_APP_ONESIGNAL_APP_ID: ${{ secrets.REACT_APP_ONESIGNAL_APP_ID }}
-          PUBLIC_URL: /ikotoba_frontend
+          # PUBLIC_URL: /ikotoba_frontend
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
