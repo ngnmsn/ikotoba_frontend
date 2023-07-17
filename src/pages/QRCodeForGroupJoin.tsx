@@ -32,7 +32,7 @@ function QRCodeForGroupJoin() {
           </div>
         </div>
         <div className='w-full flex justify-center pt-14'>
-          <QRCodeSVG value={uri.origin + process.env.PUBLIC_URL + '/group_join/' + groupId}></QRCodeSVG>
+          <QRCodeSVG value={uri.origin + '/group_join/' + groupId}></QRCodeSVG>
         </div>
       </div>
     </div>

@@ -11,14 +11,6 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <script type="text/javascript">
-      const path = sessionStorage.getItem('path');
-      console.log(path);
-      if (path) {
-        sessionStorage.removeItem('path');
-        window.history.replaceState(null, null, path);
-      }
-    </script>
     <title>iKotoba</title>
   </head>
   <body>
