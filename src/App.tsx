@@ -23,7 +23,6 @@ function App() {
   const [session, setSession] = useState<any>(null);
   const [userId, setUserId] = useState<string|null>(null);
   const [oneSignalInitialized, setOneSignalInitialized] = useState<boolean>(false);
-  // const location = useLocation();
 
   OneSignal.on('notificationDisplay', function(event) {
     console.warn('OneSignal notification displayed:', event);
@@ -66,6 +65,7 @@ function App() {
     const initialize = async () => {
       await supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session)
+        localStorage.setItem('isSession', 'true')
         if (session!=null){
           setUserId(session.user.id)
           initializeOneSignal(session.user.id)
@@ -77,6 +77,7 @@ function App() {
 
     const authListener = supabase.auth.onAuthStateChange( async (_event, session) => {
       setSession(session)
+      localStorage.setItem('isSession', 'true')
       if (session!=null){
         setUserId(session.user.id)
         initializeOneSignal(session.user.id)
@@ -92,20 +93,20 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/login' element={session ? <Navigate replace to='/home'/> : <Login />}></Route>
-          <Route path='/' element={session ? <Navigate replace to='/home'/> : <RedirectLogin />}></Route>
-          <Route path='/home' element={session ? <Home userId={userId}/> : <RedirectLogin />}></Route>
-          <Route path='/group/:groupId' element={session ? <Group /> : <RedirectLogin />}></Route>
-          <Route path='/talk_session/:talkSessionId' element={session ? <TalkSession userId={userId}/> : <RedirectLogin />}></Route>
-          <Route path='/secret_word_setting/:groupId' element={session ? <SecretWordSetting /> : <RedirectLogin />}></Route>
-          <Route path='/secret_word_edit' element={session ? <SecretWordEdit userId={userId}/> : <RedirectLogin />}></Route>
-          <Route path='/secret_word_add/:groupId' element={session ? <SecretWordAdd userId={userId} /> : <RedirectLogin />}></Route>
-          <Route path='/group_add' element={session ? <GroupAdd userId={userId} /> : <RedirectLogin />}></Route>
-          <Route path='/group_edit/:groupId' element={session ? <GroupEdit /> : <RedirectLogin />}></Route>
-          <Route path='/talk_session_add/:groupId' element={session ? <TalkSessionAdd /> : <RedirectLogin />}></Route>
-          <Route path='/talk_session_edit/:talkSessionId' element={session ? <TalkSessionEdit /> : <RedirectLogin />}></Route>
-          <Route path='/qrcode_group_join/:groupId' element={session ? <QRCodeForGroupJoin /> : <RedirectLogin />}></Route>
-          <Route path='/group_join/:groupId' element={session ? <GroupJoin userId={userId}/> : <RedirectLogin />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/' element={localStorage.getItem('isSession') === 'true' ? <Navigate replace to='/home'/> : <RedirectLogin />}></Route>
+          <Route path='/home' element={localStorage.getItem('isSession') === 'true' ? <Home userId={userId}/> : <RedirectLogin />}></Route>
+          <Route path='/group/:groupId' element={localStorage.getItem('isSession') === 'true' ? <Group /> : <RedirectLogin />}></Route>
+          <Route path='/talk_session/:talkSessionId' element={localStorage.getItem('isSession') === 'true' ? <TalkSession userId={userId}/> : <RedirectLogin />}></Route>
+          <Route path='/secret_word_setting/:groupId' element={localStorage.getItem('isSession') === 'true' ? <SecretWordSetting /> : <RedirectLogin />}></Route>
+          <Route path='/secret_word_edit' element={localStorage.getItem('isSession') === 'true' ? <SecretWordEdit userId={userId}/> : <RedirectLogin />}></Route>
+          <Route path='/secret_word_add/:groupId' element={localStorage.getItem('isSession') === 'true' ? <SecretWordAdd userId={userId} /> : <RedirectLogin />}></Route>
+          <Route path='/group_add' element={localStorage.getItem('isSession') === 'true' ? <GroupAdd userId={userId} /> : <RedirectLogin />}></Route>
+          <Route path='/group_edit/:groupId' element={localStorage.getItem('isSession') === 'true' ? <GroupEdit /> : <RedirectLogin />}></Route>
+          <Route path='/talk_session_add/:groupId' element={localStorage.getItem('isSession') === 'true' ? <TalkSessionAdd /> : <RedirectLogin />}></Route>
+          <Route path='/talk_session_edit/:talkSessionId' element={localStorage.getItem('isSession') === 'true' ? <TalkSessionEdit /> : <RedirectLogin />}></Route>
+          <Route path='/qrcode_group_join/:groupId' element={localStorage.getItem('isSession') === 'true' ? <QRCodeForGroupJoin /> : <RedirectLogin />}></Route>
+          <Route path='/group_join/:groupId' element={localStorage.getItem('isSession') === 'true' ? <GroupJoin userId={userId}/> : <RedirectLogin />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
