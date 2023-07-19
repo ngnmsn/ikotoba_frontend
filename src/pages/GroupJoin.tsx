@@ -10,11 +10,16 @@ type Props = {
 
 function Form(props: Props) {
   const params = useParams();
-  const [groupId, setGroupId] = useState(Number(params.groupId));
+  const groupId_bf_rep = params.groupId;
+  console.log(groupId_bf_rep);
+  const regex = /([0-1]+),.*/
+  const groupId_af_rep = groupId_bf_rep?.replace(regex, '$1');
+  const [groupId, setGroupId] = useState(Number(groupId_af_rep));
   const [groupName, setGroupName] = useState<string>('');
   const [codeName, setCodeName] = useState<string>('');
   const [userId, setUserId] = useState<string|null>(props.userId);
   const navigation = useNavigate();
+  console.log(groupId);
 
   const hundleGroupJoin = async(event:any) => {
     event.preventDefault();
